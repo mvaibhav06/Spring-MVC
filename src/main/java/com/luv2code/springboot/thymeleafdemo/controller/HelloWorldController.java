@@ -3,12 +3,15 @@ package com.luv2code.springboot.thymeleafdemo.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HelloWorldController {
 
-    @RequestMapping("/showForm")
+    @GetMapping("/showForm")
     public String showForm(){
         return "helloworld-form";
     }
@@ -26,6 +29,18 @@ public class HelloWorldController {
         name = name.toUpperCase();
 
         String message = "Yo " + name;
+
+        model.addAttribute("message", message);
+
+        return "helloworld";
+    }
+
+    @GetMapping("/processForm3")
+    public String proceessForm3(@RequestParam("studentName") String name, Model model){
+
+        name = name.toUpperCase();
+
+        String message = "Hey " + name;
 
         model.addAttribute("message", message);
 
